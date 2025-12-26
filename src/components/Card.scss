@@ -1,0 +1,38 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    border: 1px solid #ccc;
+    background-color: #FFFFFF;
+    width: 370px;
+    height: 250px;
+    .cardLogo{
+        background-color:#D9D9D9;
+        width: 53px;
+        height:52px;
+        margin-left: 10px;
+        margin-top: 20px;
+        border-radius: 6px;
+    }
+    .cardTitle{
+        font-weight: bold;
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .cardDescription{
+        margin-left: 10px;
+    }
+    .cardMore{
+        margin-top: 30px;
+        margin-left: 10px;
+        cursor: pointer;
+        text-decoration: underline black;
+    }
+    transition: all 0.3s ease;
+    &:hover {
+        box-shadow: 0 4px 60px rgba(0, 0, 0, 0.2);
+        transform: scale(1.005);
+    }
+}

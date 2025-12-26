@@ -1,0 +1,21 @@
+.NavBar{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    .logo{
+        color: #2563EB;
+        font-weight: bold;
+        font-size: 24px;
+        width: 50%;    
+    }
+    gap: 30px;
+    font-size: 16px;
+    .home,.supervisorLogin,.adminLogin,.addPdfs,.admin{
+        cursor: pointer;
+    }
+    .logout{
+        color:red;
+        cursor: pointer;
+    }
+
+}

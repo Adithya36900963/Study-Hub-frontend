@@ -1,0 +1,35 @@
+.bodyClass {
+    .imgBackground{
+        background-image: url('../assets/Books.jpeg');
+        height: 100vh;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // vertical center
+        align-items: center;     // horizontal center
+    }
+    .imgHeading{
+        font-size: 3rem;
+        color: white;
+    }
+    .imgSpam{
+        font-size: 1.5rem;
+        color: white;
+    }
+    .regulationContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        .regulationHeading{
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .regulationSpam{
+            margin-top: 15px ;
+            font-size: 18px;
+        }
+    }
+    
+}
