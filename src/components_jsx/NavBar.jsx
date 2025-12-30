@@ -1,4 +1,4 @@
-import './components/NavBar.scss';
+import '../components_Scss/NavBar.scss';
 export default function NavBar(props) {
   return (
     <ul className="NavBar">

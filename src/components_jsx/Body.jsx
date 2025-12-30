@@ -1,11 +1,11 @@
-import './components/Body.scss'
+import '../components_Scss/Body.scss'
 export default function Body(props)
 {
     return(
         <div className="bodyClass">
             <div className="imgBackground">
-                <div className="imgHeading">Welcome to Study Hub</div>
-                <div className="imgSpam">Find study materials,syllabus pdfs and regulation updates in one place.</div>
+                <div className="imgHeading">{props.imgHeading}</div>
+                <div className="imgSpam">{props.imgSpam}</div>
             </div>
             {
                 (props.regulation===true)?

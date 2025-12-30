@@ -1,13 +1,16 @@
-import NavBar from './NavBar';
-import Card from './Card';
-import Body from './Body';
+import { BrowserRouter, Route,Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import Regulation from "./Pages/Regulation";
+
 export default function App()
 {
     return(
-        <>
-            <NavBar supervisor={true} admin={false}/>
-            <Body regulation={true}/>
-            <Card />
-        </>
+        
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/api/regulation/:regulationId" element={<Regulation />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
