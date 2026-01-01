@@ -1,7 +1,8 @@
 .Cards{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 50px;
-
+    margin-top: 20px;
     justify-content: center;
 }

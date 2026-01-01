@@ -2,7 +2,7 @@ import Card from "../components_jsx/Card";
 import Body from "../components_jsx/Body";
 import { useState ,useEffect} from "react";
 import { useParams } from "react-router-dom";
-export default function Regulation()
+export default function Semester()
 {
     const [data,setData]=useState([
         // {
@@ -14,9 +14,9 @@ export default function Regulation()
         //     branch:"ECE"
         // }
     ]);
-    const {regulationId} =useParams();
+    const {regulationId,semesterId,branchId} =useParams();
 
-    const url=`http://localhost:8080/api/branches/${regulationId}`;
+    const url=`http://localhost:8080/api/subjects/${regulationId}/${branchId}/${semesterId}`;
     useEffect(()=>{
         fetch(url)
         .then(res=>{
@@ -37,9 +37,9 @@ export default function Regulation()
             {
                 data.map((d)=><Card 
                     key={d.id}
-                    cardTitle={`Branch ${d.name}`}
+                    cardTitle={`Subject ${d.name}`}
                     cardDescription={`Specialized materials for ${d.name}`}
-                    cardLink={`/api/semester/${regulationId}/${d.id}`}
+                    cardLink={`/api/pdfs/${regulationId}/${d.id}`}
                     cardUrlName={`View ${d.name} Materials`}
                 />)
             }

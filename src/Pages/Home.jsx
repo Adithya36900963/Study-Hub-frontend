@@ -5,18 +5,38 @@ import Card from  "../components_jsx/Card"
 export default function Home()
 {
     const [data,setData]=useState([
-        {
-            "id":101,
-            "name":"R23"
-        },
-        {
-            "id":102,
-            "name":"R20"
-        },
-        {
-            "id":103,
-            "name":"R16"
-        }
+        // {
+        //     "id":101,
+        //     "name":"R23"
+        // },
+        // {
+        //     "id":102,
+        //     "name":"R20"
+        // },
+        // {
+        //     "id":103,
+        //     "name":"R16"
+        // },
+        //  {
+        //     "id":103,
+        //     "name":"R16"
+        // },
+        // {
+        //     "id":101,
+        //     "name":"R23"
+        // },
+        // {
+        //     "id":102,
+        //     "name":"R20"
+        // },
+        // {
+        //     "id":103,
+        //     "name":"R16"
+        // },
+        //  {
+        //     "id":103,
+        //     "name":"R16"
+        // }
     ]);
     const url="http://localhost:8080/api/regulations";
     useEffect(()=>{
