@@ -1,35 +1,58 @@
 .bodyClass {
-    .imgBackground{
-        background-image: url('../assets/Books.jpeg');
+    .imgBackground {
+        position: relative;
         height: 100vh;
-        opacity: 0.4;
+        width: 100vw;
+        background-image: url('../assets/Books.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
         display: flex;
         flex-direction: column;
-        justify-content: center; // vertical center
-        align-items: center;     // horizontal center
+        justify-content: center;
+        align-items: center;
+
+        // overlay
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.4); // dark overlay
+            z-index: 1;
+        }
+
+        > * {
+            position: relative;
+            z-index: 2;
+        }
     }
-    .imgHeading{
+
+    .imgHeading {
         font-size: 3rem;
         color: white;
     }
-    .imgSpam{
+
+    .imgSpam {
         font-size: 1.5rem;
         color: white;
     }
-    .regulationContainer{
+
+    .regulationContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 20px;
         margin-bottom: 40px;
-        .regulationHeading{
+
+        .regulationHeading {
             font-size: 24px;
             font-weight: bold;
         }
-        .regulationSpam{
-            margin-top: 15px ;
+
+        .regulationSpam {
+            margin-top: 15px;
             font-size: 18px;
         }
     }
-    
 }
