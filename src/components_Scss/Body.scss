@@ -1,58 +1,44 @@
-.bodyClass {
-    .imgBackground {
-        position: relative;
-        height: 100vh;
-        width: 100vw;
-        background-image: url('../assets/Books.jpeg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+.imgBackground {
+    position: relative;              /* necessary for overlay */
+    height: 100vh;                    /* full viewport height */
+    width: 100vw;                     /* full viewport width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;          /* vertical center */
+    align-items: center;              /* horizontal center */
+    overflow: hidden;                 /* prevent scrollbars */
+}
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+.imgBackground::before {
+    content: "";
+    position: absolute;
+    inset: 0;                         /* top:0; right:0; bottom:0; left:0 */
+    background-image: url("../assets/Books.jpeg"); /* image path */
+    background-repeat: no-repeat;     /* prevent tiling */
+    background-size: cover;           /* fill screen, scale proportionally */
+    background-position: center;      /* center crop for desktop */
+    opacity: 0.4;                     /* only background fades */
+    z-index: -1;                       /* behind content */
+}
 
-        // overlay
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.4); // dark overlay
-            z-index: 1;
-        }
-
-        > * {
-            position: relative;
-            z-index: 2;
-        }
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .imgBackground::before {
+        background-position: top;     /* keeps important part visible */
     }
+}
 
-    .imgHeading {
-        font-size: 3rem;
-        color: white;
-    }
+/* Optional: Text inside the container remains sharp */
+.imgBackground > * {
+    position: relative;
+    z-index: 1;                       /* ensure above overlay */
+    color: #fff;                       /* readable text */
+    text-align: center;
+    padding: 0 1rem;                   /* padding for small screens */
+}
 
-    .imgSpam {
-        font-size: 1.5rem;
-        color: white;
-    }
-
-    .regulationContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
-        margin-bottom: 40px;
-
-        .regulationHeading {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .regulationSpam {
-            margin-top: 15px;
-            font-size: 18px;
-        }
-    }
+/* Optional: prevent horizontal scroll */
+body {
+    margin: 0;
+    overflow-x: hidden;
 }
