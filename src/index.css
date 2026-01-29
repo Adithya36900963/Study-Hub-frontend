@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-family-base: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-family-base);
+
+}
+
+.head{
+  @apply text-center font-semibold text-lg justify-center items-center;
+}
