@@ -16,17 +16,14 @@ export default function Regulation() {
   // Regulation Id
   const { regulationId } = useParams();
 
-  /* ================= BODY ================= */
   const imgHeading = "Welcome to Study Hub";
   const imgSpam =
     "Find study materials, syllabus pdfs and regulation updates in one place.";
   const regulation = false;
 
-  /* ================= CARDS ================= */
   const url = `/api/semester/${regulationId}`;
   const title = "Branch";
 
-  /* ================= GET BRANCHES ================= */
   useEffect(() => {
     const fetchBranches = async () => {
       const res = await getBranches(regulationId);
@@ -35,13 +32,11 @@ export default function Regulation() {
     fetchBranches();
   }, [regulationId]);
 
-  /* ================= ADD ================= */
   const addData = async (branch) => {
     const res = await addBranch(regulationId, branch);
     setData((prev) => [...prev, res.data.data]);
   };
 
-  /* ================= DELETE ================= */
   const deleteData = async (branchId) => {
     const res = await deleteBranch(regulationId, branchId);
     setData((prev) =>
@@ -49,7 +44,6 @@ export default function Regulation() {
     );
   };
 
-  /* ================= UPDATE ================= */
   const updateData = async (branchId, branch) => {
     const res = await updateBranch(branchId, branch);
     setData((prev) =>
@@ -59,7 +53,6 @@ export default function Regulation() {
     );
   };
 
-  /* ================= DESCRIPTION ================= */
   const description = (name) => {
     return (
       <div className="text-sm text-gray-600 mt-2">

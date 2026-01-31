@@ -14,17 +14,14 @@ export default function Semester() {
   const { regulationId, branchId, semesterId } = useParams();
   const [data, setData] = useState([]);
 
-  /* ================= BODY ================= */
   const imgHeading = "Welcome to Study Hub";
   const imgSpam =
     "Find study materials, syllabus pdfs and regulation updates in one place.";
   const regulation = false;
 
-  /* ================= CARDS ================= */
   const url = `/api/pdfs`;
   const title = "Subject";
 
-  /* ================= GET SUBJECTS ================= */
   useEffect(() => {
     const fetchSubjects = async () => {
       const res = await getSubjects(regulationId, branchId, semesterId);
@@ -33,7 +30,6 @@ export default function Semester() {
     fetchSubjects();
   }, [regulationId, branchId, semesterId]);
 
-  /* ================= ADD ================= */
   const addData = async (subject) => {
     const res = await addSubject(
       regulationId,
@@ -44,7 +40,6 @@ export default function Semester() {
     setData((prev) => [...prev, res.data.data]);
   };
 
-  /* ================= DELETE ================= */
   const deleteData = async (subjectId) => {
     const res = await deleteSubject(
       regulationId,
@@ -57,7 +52,6 @@ export default function Semester() {
     );
   };
 
-  /* ================= UPDATE ================= */
   const updateData = async (subjectId, subject) => {
     const res = await updateSubject(subjectId, subject);
     setData((prev) =>
@@ -67,7 +61,6 @@ export default function Semester() {
     );
   };
 
-  /* ================= DESCRIPTION ================= */
   const description = (name) => {
     return (
       <div className="text-sm text-gray-600 mt-2">

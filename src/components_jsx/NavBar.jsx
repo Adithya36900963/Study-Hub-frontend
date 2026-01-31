@@ -6,12 +6,11 @@ export default function NavBar() {
 
   return (
     <ul className="flex flex-row items-center gap-[30px] list-none text-[16px] px-6 py-4">
-      {/* Logo */}
+    
       <li className="text-blue-600 font-bold text-[24px] w-1/2">
         Study Hub
       </li>
 
-      {/* Home */}
       <li
         className="cursor-pointer hover:text-blue-500"
         onClick={() => navigate("/")}
@@ -19,7 +18,7 @@ export default function NavBar() {
         Home
       </li>
 
-      {/* Login (when user not logged in) */}
+     
       {!user && (
         <li
           className="cursor-pointer hover:text-blue-500"
@@ -29,7 +28,6 @@ export default function NavBar() {
         </li>
       )}
 
-      {/* User logged in */}
       {user && (
         <>
           {user.role === "ADMIN" && (

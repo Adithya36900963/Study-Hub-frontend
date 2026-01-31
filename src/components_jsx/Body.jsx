@@ -7,15 +7,15 @@ export default function Body() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      {/* Hero / Image Background */}
+      
       <div className="relative h-[278px] w-screen flex flex-col items-center justify-center overflow-hidden text-center bg-cover bg-center">
-        {/* Background overlay */}
+       
         <div
           className="absolute inset-0 bg-cover bg-center bg-white/90 bg-top -z-10"
           style={{ backgroundImage: `url(${bgImage})`,opacity:0.1 }}
         />
 
-        {/* Text Content */}
+     
         <div className="relative z-10 text-black justify-center items-center text-center px-4">
           <div className="text-4xl md:text-5xl font-bold text-black mb-4">
             {imgHeading}
@@ -26,7 +26,7 @@ export default function Body() {
         </div>
       </div>
 
-      {/* Regulation Section */}
+     
       {regulation && (
         <div className="flex flex-col items-center text-center px-6 py-12">
           <div className="text-2xl md:text-3xl font-semibold mb-4">

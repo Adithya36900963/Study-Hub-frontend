@@ -9,17 +9,14 @@ export default function Branch() {
   const { regulationId, branchId } = useParams();
   const [data, setData] = useState([]);
 
-  /* ================= BODY PROPS ================= */
   const imgHeading = "Welcome to Study Hub";
   const imgSpam =
     "Find study materials, syllabus pdfs and regulation updates in one place.";
   const regulation = false;
 
-  /* ================= CARDS PROPS ================= */
   const url = `/api/subject/${regulationId}/${branchId}`;
   const title = "Semester";
 
-  /* ================= SEM FORMAT ================= */
   const formatSemester = (number) => {
     const year = Math.ceil(number / 2);
     const sem = number % 2 === 1 ? 1 : 2;
@@ -41,7 +38,7 @@ export default function Branch() {
     fetchSemesters();
   }, [regulationId]);
 
-  /* ================= DESCRIPTION ================= */
+  
   const description = (name) => {
     return (
       <div className="text-sm text-gray-600 mt-2">

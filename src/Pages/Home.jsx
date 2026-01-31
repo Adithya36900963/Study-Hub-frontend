@@ -12,17 +12,14 @@ import ItemsContext from "../context/ItemsContext";
 export default function Home() {
   const [data, setData] = useState([]);
 
-  /* ================= BODY ================= */
   const imgHeading = "Welcome to Study Hub";
   const imgSpam =
     "Find study materials, syllabus pdfs and regulation updates in one place.";
   const regulation = true;
 
-  /* ================= CARDS ================= */
   const url = "/api/regulation";
   const title = "Regulation";
 
-  /* ================= GET REGULATIONS ================= */
   useEffect(() => {
     const fetchRegulations = async () => {
       const res = await getRegulations();
@@ -31,13 +28,11 @@ export default function Home() {
     fetchRegulations();
   }, []);
 
-  /* ================= ADD ================= */
   const addData = async (regulation) => {
     const res = await addRegulation(regulation);
     setData((prev) => [...prev, res.data.data]);
   };
 
-  /* ================= DELETE ================= */
   const deleteData = async (regulationId) => {
     const res = await deleteRegulation(regulationId);
     setData((prev) =>
@@ -45,7 +40,6 @@ export default function Home() {
     );
   };
 
-  /* ================= UPDATE ================= */
   const updateData = async (regulationId, regulation) => {
     const res = await updateRegulation(regulationId, regulation);
     setData((prev) =>
@@ -55,7 +49,6 @@ export default function Home() {
     );
   };
 
-  /* ================= DESCRIPTION ================= */
   const description = (name) => {
     return (
       <div className="text-sm text-gray-600 mt-2">

@@ -16,7 +16,6 @@ export default function PDFs() {
   // Getting Subject Id
   const { subjectId } = useParams();
 
-  /* ================= BODY ================= */
   const imgHeading = "Welcome to Study Hub";
   const imgSpam =
     "Find study materials, syllabus pdfs and regulation updates in one place.";
