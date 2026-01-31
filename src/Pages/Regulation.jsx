@@ -1,185 +1,90 @@
-import Card from "../components_jsx/Card";
-import Body from "../components_jsx/Body";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import addIcon from "../assets/Add.png";
+import Body from "../components_jsx/Body";
+import Cards from "../components_jsx/Cards";
+import {
+  addBranch,
+  getBranches,
+  updateBranch,
+  deleteBranch,
+} from "../services/branchService";
+import ItemsContext from "../context/ItemsContext";
 
 export default function Regulation() {
-  const [data, setData] = useState([
-    {
-      "id": 12,
-      "name": "CSE"
-    }
-  ]);
+  const [data, setData] = useState([]);
 
-  const [branch, setBranch] = useState("");
-  const [toggle, setToggle] = useState(1);
-
+  // Regulation Id
   const { regulationId } = useParams();
-  const url = `http://localhost:8080/api/branches/${regulationId}`;
 
+  //Image section Content
+  const imgHeading = "Welcome to Study Hub";
+  const imgSpam =
+    "Find study materials, syllabus pdfs and regulation updates in one place.";
+  const regulation = false;
+
+  //Cards Content
+  const url = `/api/semester/${regulationId}`;
+  const title = "Branch";
+
+  //Get Branches by Regulation Id
   useEffect(() => {
-    fetch(url)
-      .then((res) => {
-        if (!res.ok)
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json();
-      })
-      .then((data) => setData(data))
-      .catch((err) => console.error("Fetch failed:", err.message));
-  }, [url]);
+    const fetchBranches = async () => {
+      const res = await getBranches(regulationId);
+      setData(res.data.data);
+    };
+    fetchBranches();
+  }, [regulationId]);
 
-  const addData = () => {
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: branch }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to add branch");
-        return res.json();
-      })
-      .then((newBranch) => {
-        setData((prev) => [...prev, newBranch]);
-        setBranch("");
-      })
-      .catch((err) => console.error("POST error:", err.message));
+  //Add Branch by Regulation Id
+  const addData = async (branch) => {
+    const res = await addBranch(regulationId, branch);
+    setData((prev) => [...prev, res.data.data]);
+  };
+
+  //Delete Branch by Regulation Id
+  const deleteData = async (branchId) => {
+    const res = await deleteBranch(regulationId, branchId);
+    setData((prev) =>
+      prev.filter((item) => item.id !== res.data.data.id)
+    );
+  };
+
+  //Update Branch by Regulation Id
+  const updateData = async (branchId, branch) => {
+    const res = await updateBranch(branchId, branch);
+    setData((prev) =>
+      prev.map((item) =>
+        item.id === res.data.data.id ? res.data.data : item
+      )
+    );
+  };
+
+  //Cards description
+  const description = (name) => {
+    return (
+      <div className="text-sm text-gray-600 mt-2">
+        {`Comprehensive study materials and syllabus for the ${name} batch. Updated for the latest academic year.`}
+      </div>
+    );
   };
 
   return (
-    <>
-      <Body
-        imgHeading="Select Your Department"
-        imgSpam="Choose your specific branch to access study materials and syllabus copies for your curriculum"
-        regulation={false}
-      />
-
-      {/* Cards */}
-      <div className="flex flex-wrap justify-center gap-[50px] mt-[20px]">
-        {data.map((d) => (
-          <Card
-            key={d.id}
-            cardTitle={`Branch ${d.name}`}
-            cardDescription={`Specialized materials for ${d.name}`}
-            cardLink={`/api/semester/${regulationId}/${d.id}`}
-            cardUrlName={`View ${d.name} Materials`}
-          />
-        ))}
-
-        {/* Add Information Card (same as AddInformation.jsx) */}
-        <div
-          className="
-            w-[370px] h-[250px]
-            rounded-[14px]
-            border border-[#ccc]
-            bg-white
-            flex flex-col
-            justify-between
-            p-4
-          "
-        >
-          {toggle === 0 ? (
-<>
-  {/* Title */}
-  <div className="head">
-    Enter Branch
-  </div>
-
-  {/* Form */}
-  <form
-    className="
-      flex flex-col
-      items-center 
-      gap-3
-      py-12
-      w-full justify-center
-    "
-    onSubmit={(e) => {
-      e.preventDefault();
-      addData();
-      setToggle(1);
-    }}
-  >
-    {/* Input */}
-    <input
-      type="text"
-      value={branch}
-      onChange={(e) => setBranch(e.target.value)}
-      required
-      placeholder="Enter branch name"
-      className="
-        border border-gray-300
-        rounded-md
-        px-4 py-2
-        w-[80%]
-        text-center
-        focus:outline-none
-        focus:ring-2
-        focus:ring-blue-400
-      "
-    />
-
-    {/* Buttons */}
-    <div className="flex gap-5 mt-1">
-      <button
-        type="button"
-        onClick={() => setToggle(1)}
-        className="
-          px-5 py-2
-          rounded-[8px]
-          border border-gray-400
-          hover:bg-gray-100
-        "
-      >
-        Cancel
-      </button>
-
-      <button
-        type="submit"
-        className="
-          bg-[rgb(0,123,255)]
-          text-white
-          px-6 py-2
-          rounded-[8px]
-          hover:bg-blue-600
-        "
-      >
-        Submit
-      </button>
-    </div>
-  </form>
-</>
-
-
-          ) : (
-            <>
-              <div className="head">
-                Add Branch
-              </div>
-
-              <div className="flex justify-center items-center">
-                <button
-                  onClick={() => setToggle(0)}
-                  className="
-                    border-0 w-[150px] h-[150px]
-                    transition-all duration-300 ease-in-out
-                
-                    flex justify-center items-center
-                  "
-                >
-                  <img
-                    src={addIcon}
-                    alt="Add information"
-                    className="w-[150px] h-[150px] justify-center items-center object-contain my-6"
-                  />
-                </button>
-              </div>
-
-              <div /> {/* spacer to match justify-between */}
-            </>
-          )}
-        </div>
-      </div>
-    </>
+    <ItemsContext.Provider
+      value={{
+        addData,
+        deleteData,
+        updateData,
+        description,
+        title,
+        url,
+        data,
+        imgHeading,
+        imgSpam,
+        regulation,
+      }}
+    >
+      <Body />
+      <Cards />
+    </ItemsContext.Provider>
   );
 }

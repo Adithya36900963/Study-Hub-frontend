@@ -10,9 +10,167 @@
 
 body {
   font-family: var(--font-family-base);
-
 }
 
-.head{
-  @apply text-center font-semibold text-lg justify-center items-center;
+/* ================= CARDS ================= */
+
+.cardmain {
+  @apply flex flex-col rounded-[14px] border border-[#ccc] bg-white p-4
+         transition-all duration-300 ease-in-out;
+}
+
+.cardlogo {
+  @apply w-[53px] h-[53px] mt-[6px] rounded-[6px] bg-[#D9D9D9] flex items-center justify-center;
+}
+
+.cardlogoimg {
+  @apply w-full h-full object-contain rounded-[6px];
+}
+
+.cardtitle {
+  @apply text-[24px] font-bold mt-[10px];
+}
+
+.carddesc {
+  @apply text-[12px] mt-[6px];
+}
+
+.cardlink {
+  @apply text-blue-600 mt-[20px] cursor-pointer underline;
+}
+
+/* ================= ADD CARD ================= */
+
+.addcardmain {
+  @apply w-[370px] h-[250px] rounded-[14px] border border-[#ccc]
+         bg-white flex flex-col justify-between p-4;
+}
+
+.addcardtitle {
+  @apply text-center font-semibold text-lg;
+}
+
+.head {
+  @apply text-center font-semibold text-lg;
+}
+
+.addbuttonwithimg {
+  @apply flex justify-center items-center;
+}
+
+.addcardbutton {
+  @apply w-[40px] h-[40px] rounded-full flex justify-center items-center
+         transition-all duration-300 ease-in-out hover:shadow-md hover:scale-105;
+}
+
+.addicon {
+  @apply w-[20px] h-[20px] object-contain;
+}
+
+.addform {
+  @apply flex justify-center;
+}
+
+.addsubmmit {
+  @apply bg-blue-600 text-white px-6 py-2 rounded-[8px] hover:bg-blue-700;
+}
+
+/* ================= BODY BANNER ================= */
+
+.bodybanner {
+  @apply relative w-full max-w-[1536px] h-[278px] mx-auto mt-[20px]
+         flex justify-center items-center text-center bg-cover bg-center;
+}
+
+.banneroverlay {
+  @apply absolute inset-0 bg-white/90;
+}
+
+.bodycontent {
+  @apply relative flex flex-col justify-center items-center;
+}
+
+.bodyhead {
+  @apply text-[56px] font-extrabold text-black;
+}
+
+.bodydesc {
+  @apply text-lg mt-1 text-black;
+}
+
+.aca {
+  @apply flex flex-col items-center mt-[20px] mb-[40px] text-center;
+}
+
+.acahead {
+  @apply text-[36px] font-bold;
+}
+
+.acadesc {
+  @apply mt-[15px] text-[16px] max-w-[900px];
+}
+
+/* ================= HOME ================= */
+
+.hcard {
+  @apply flex flex-wrap justify-center gap-[50px] mt-[20px];
+}
+
+.hcardmain {
+  @apply flex flex-col items-center;
+}
+
+.hcardinput {
+  @apply border rounded-md px-3 py-1;
+}
+
+.hcardbutton {
+  @apply border px-4 py-2 rounded-md;
+}
+
+.hbutton {
+  @apply flex justify-center items-center transition-all duration-300 hover:scale-[1.01];
+}
+
+.hicon {
+  @apply w-[150px] h-[150px] object-contain my-6;
+}
+
+/* ================= REGISTER ================= */
+
+.form {
+  @apply flex flex-col items-center gap-2 py-12 w-full;
+}
+
+.inputfield {
+  @apply border border-gray-300 rounded-md px-4 py-2 w-[80%] text-center
+         focus:outline-none focus:ring-2 focus:ring-blue-400;
+}
+
+.button {
+  @apply px-5 py-2 rounded-[8px] border border-gray-400 hover:bg-gray-100;
+}
+
+.addbranch {
+  @apply w-[150px] h-[150px] flex justify-center items-center
+         transition-all duration-300 ease-in-out;
+}
+
+.img {
+  @apply w-[150px] h-[150px] object-contain my-6;
+}
+
+/* ================= LOGIN ================= */
+
+.main {
+  @apply min-h-screen flex items-center justify-center bg-gray-100;
+}
+
+.formlogin {
+  @apply w-full max-w-sm bg-white rounded-xl shadow-lg px-6 py-8
+         flex flex-col gap-5;
+}
+
+.title {
+  @apply text-2xl font-semibold text-center;
 }
