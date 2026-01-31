@@ -1,11 +1,9 @@
 import axios from 'axios';
-import { useHref } from 'react-router-dom';
-const url=process.env.Rect_App_Url;
-axios.create({
+
+const url="http://localhost:8080";
+
+const api =axios.create({
     baseURL:url,
-    headers:{
-        "Content-Type":"application/json"
-    },
     withCredentials: true
 });
 
@@ -23,20 +21,22 @@ api.interceptors.response.use(
     switch (status) {
       case 401:
         alert("Session expired. Please login again.");
-        
+        localStorage.removeItem("user")
+        window.location.href("/auth/login");
         break;
 
       case 403:
         alert("You are not authorized to perform this action.");
+        localStorage.removeItem("user")
         break;
 
-      case 404:
-        alert("Requested resource not found.");
-        break;
+    //   case 404:
+    //     alert("Requested resource not found.");
+    //     break;
 
-      case 500:
-        alert("Internal server error.");
-        break;
+    //   case 500:
+    //     alert("Internal server error.");
+    //     break;
 
       default:
         alert("Something went wrong!");

@@ -1,61 +1,69 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Body from "../components_jsx/Body";
-import Card from "../components_jsx/Card";
+import Cards from "../components_jsx/Cards";
+import { getSemesters } from "../services/semesterService";
+import ItemsContext from "../context/ItemsContext";
 
 export default function Branch() {
   const { regulationId, branchId } = useParams();
-  const [data, setData] = useState([
-    {
-      Id: 1,
-      number: "1-1",
+  const [data, setData] = useState([]);
 
-    },
-    {
-      Id: 2,
-      number: "1-2",
+  /* ================= BODY PROPS ================= */
+  const imgHeading = "Welcome to Study Hub";
+  const imgSpam =
+    "Find study materials, syllabus pdfs and regulation updates in one place.";
+  const regulation = false;
 
-    },
-    {
-      Id: 3,
-      number: "2-1",
+  /* ================= CARDS PROPS ================= */
+  const url = `/api/subject/${regulationId}/${branchId}`;
+  const title = "Semester";
 
-    }
-    
-  ]);
-
-  const url = "http://localhost:8080/api/semesters";
+  /* ================= SEM FORMAT ================= */
+  const formatSemester = (number) => {
+    const year = Math.ceil(number / 2);
+    const sem = number % 2 === 1 ? 1 : 2;
+    return `${year}-${sem}`;
+  };
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => {
-        if (!res.ok)
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json();
-      })
-      .then((data) => setData(data))
-      .catch((err) => console.error("Fetch failed:", err.message));
-  }, [url]);
+    const fetchSemesters = async () => {
+      const res = await getSemesters(regulationId);
+
+      const formatted = res.data.data.map((s) => ({
+        id: s.id,
+        name: formatSemester(s.number),
+      }));
+
+      setData(formatted);
+    };
+
+    fetchSemesters();
+  }, [regulationId]);
+
+  /* ================= DESCRIPTION ================= */
+  const description = (name) => {
+    return (
+      <div className="text-sm text-gray-600 mt-2">
+        {`Comprehensive study materials and syllabus for the ${name} batch. Updated for the latest academic year.`}
+      </div>
+    );
+  };
 
   return (
-    <>
-      <Body
-        imgHeading="Select Your Semester"
-        imgSpam="Choose your current semester to access subject-wise pdfs and syllabus pdfs"
-        regulation={false}
-      />
-
-      <div className="flex flex-row flex-wrap justify-center gap-[50px] mt-[20px]">
-        {data.map((d) => (
-          <Card
-            key={d.id}
-            cardTitle={`Semester ${d.number}`}
-            cardDescription={`Comprehensive study materials and syllabus for the ${d.number} batch. Updated for the latest academic year.`}
-            cardLink={`/api/subject/${regulationId}/${branchId}/${d.number}`}
-            cardUrlName={`View ${d.number} Materials`}
-          />
-        ))}
-      </div>
-    </>
+    <ItemsContext.Provider
+      value={{
+        description,
+        title,
+        url,
+        data,
+        imgHeading,
+        imgSpam,
+        regulation,
+      }}
+    >
+      <Body />
+      <Cards />
+    </ItemsContext.Provider>
   );
 }

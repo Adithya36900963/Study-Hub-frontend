@@ -1,52 +1,54 @@
-import "../index.css"; 
-export default function NavBar(props) {
+import { useNavigate } from "react-router-dom";
+
+export default function NavBar() {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
   return (
-    <div className="font-inter justify-content:space-around mt-2">
-      <ul className="flex flex-row list-none gap-[30px] text-[16px]">
+    <ul className="flex flex-row items-center gap-[30px] list-none text-[16px] px-6 py-4">
+      {/* Logo */}
+      <li className="text-blue-600 font-bold text-[24px] w-1/2">
+        Study Hub
+      </li>
 
-        {/* Logo */}
-        <li className="text-[#2563EB] font-extrabold text-[24px] mx-4 w-1/2">
-          Study Hub
+      {/* Home */}
+      <li
+        className="cursor-pointer hover:text-blue-500"
+        onClick={() => navigate("/")}
+      >
+        Home
+      </li>
+
+      {/* Login (when user not logged in) */}
+      {!user && (
+        <li
+          className="cursor-pointer hover:text-blue-500"
+          onClick={() => navigate("/auth/login")}
+        >
+          Login
         </li>
+      )}
 
-        {/* Home */}
-        <li className="cursor-pointer">
-          Home
-        </li>
-
-        {/* Conditional rendering */}
-        {!props.supervisor && !props.admin ? (
-          <>
-            <li className="cursor-pointer">
-              Supervisor Login
-            </li>
-            <li className="cursor-pointer">
-              Admin Login
-            </li>
-          </>
-        ) : props.supervisor ? (
-          <>
-            <li className="cursor-pointer">
-              Add Pdfs
-            </li>
-          </>
-        ) : props.admin ? (
-          <>
-            <li className="cursor-pointer">
-              Add Pdfs
-            </li>
+      {/* User logged in */}
+      {user && (
+        <>
+          {user.role === "ADMIN" && (
             <li className="cursor-pointer">
               Admin
             </li>
-          </>
-        ) : null}
+          )}
 
-        {/* Logout */}
-        <li className="text-red-500 cursor-pointer">
-          Logout
-        </li>
-
-      </ul>
-    </div>
+          <li
+            className="cursor-pointer text-blue-500"
+            onClick={() => {
+              localStorage.removeItem("user");
+              navigate("/auth/login");
+            }}
+          >
+            Logout
+          </li>
+        </>
+      )}
+    </ul>
   );
 }

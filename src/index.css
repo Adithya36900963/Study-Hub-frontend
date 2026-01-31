@@ -10,9 +10,4 @@
 
 body {
   font-family: var(--font-family-base);
-
-}
-
-.head{
-  @apply text-center font-semibold text-lg justify-center items-center;
 }
