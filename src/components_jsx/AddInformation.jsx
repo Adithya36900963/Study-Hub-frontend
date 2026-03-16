@@ -14,10 +14,89 @@ export default function AddInformation() {
   const [pdfName, setPdfName] = useState("");
   const [pdf, setPdf] = useState(null);
 
+  const [password,setPassword]=useState("");
+
   if (title === "Semester") return null;
 
   const user =JSON.parse(localStorage.getItem("user") || "null");
-  
+  //User Form
+  if(user && user.role==="ADMIN" && title==="User")
+  {
+    return (
+      <div className="w-[370px] h-[250px] rounded-[14px] border border-gray-300 bg-white flex flex-col items-center">
+        {toogle === 0 ? (
+          <form
+            className="mt-[20px] ml-[50px] flex flex-col gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              if (!name || !password) {
+                alert("Please enter name and Password");
+                return;
+              }
+
+              
+
+              addData({"name":name,"password":password});
+              setToogle(1);
+              setName("");
+              setPassword(null);
+            }}
+          >
+            <label className="text-sm font-medium">Enter Name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="border border-gray-300 px-2 py-1 rounded"
+              required
+            />
+
+            <label className="text-sm font-medium">Enter Password:</label>
+            <input
+              type="password"
+              
+              onChange={(e) => setPassword(e.target.value)}
+              className="text-sm"
+              required
+            />
+
+            <div className="flex gap-4 mt-5 ml-[50px]">
+              <button
+                type="button"
+                onClick={() => setToogle(1)}
+                className="px-4 py-1 border rounded"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-1 bg-blue-500 text-white rounded"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        ) : (
+          <>
+            <div className="flex justify-center mt-2 font-semibold">
+              Add User
+            </div>
+            <button
+              onClick={() => setToogle(0)}
+              className="transition-all duration-300 hover:shadow-[0_4px_60px_rgba(0,0,0,0.2)] hover:scale-[1.005]"
+            >
+              <img
+                src={addIcon}
+                alt="Add PDF"
+                className="h-[210px] w-[300px]"
+              />
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
   //PDF Form
   if (user && user.role==="ADMIN"  && title === "PDF") {
     return (

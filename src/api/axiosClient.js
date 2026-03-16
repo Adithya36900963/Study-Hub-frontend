@@ -27,7 +27,8 @@ api.interceptors.response.use(
 
       case 403:
         alert("You are not authorized to perform this action.");
-        localStorage.removeItem("user")
+        localStorage.removeItem("user");
+        window.location.href("/auth/login");
         break;
 
     //   case 404:

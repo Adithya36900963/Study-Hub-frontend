@@ -8,7 +8,7 @@ export default function Card(props) {
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
 
-  const { deleteData, updateData, title,url } = useContext(ItemsContext);
+  const { deleteData, updateData, title} = useContext(ItemsContext);
 
   // PDF form
   const [pdfName, setPdfName] = useState("");
@@ -16,8 +16,8 @@ export default function Card(props) {
 
   const user=JSON.parse(localStorage.getItem("user") || "null");
 
-  const pdfButton=()=>{
-    window.location.href=url;
+  const pdfButton=(cardLink)=>{
+    window.location.href=cardLink ;
   }
   //UPDATE FORM
   if (toogle === false) {
@@ -209,7 +209,7 @@ export default function Card(props) {
     {(title==="PDF")?
       (<button
   type="button"
-  onClick={() => pdfButton(props.cardUrlName)}
+  onClick={() => pdfButton(`${props.cardLink}`)}
   className="bg-blue-500 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer transition-colors duration-300"
 >
   Download {props.cardName}
