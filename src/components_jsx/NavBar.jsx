@@ -31,8 +31,12 @@ export default function NavBar() {
       {user && (
         <>
           {user.role === "ADMIN" && (
-            <li className="cursor-pointer">
+            <li className="cursor-pointer"
+              onClick={()=>{
+                navigate("/api/users")
+              }}>
               Admin
+              
             </li>
           )}
 

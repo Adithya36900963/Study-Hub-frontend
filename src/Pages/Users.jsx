@@ -1,53 +1,47 @@
-import Cards from "../components_jsx/Cards";
 import Body from "../components_jsx/Body";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import Users from "../components_jsx/Users"
 import ItemsContext from "../context/ItemsContext";
 import {
-  addPDF,
-  deletePDF,
-  updatePDF,
-  getPDFS,
-} from "../services/pdfService";
+  addUser,
+  deleteUser,
+  updateUser,
+  getUsers,
+} from "../services/userService";
 
-export default function PDFs() {
+export default function User() {
   const [data, setData] = useState([]);
-
-  // Getting Subject Id
-  const { subjectId } = useParams();
 
   const imgHeading = "Welcome to Study Hub";
   const imgSpam =
-    "Find study materials, syllabus pdfs and regulation updates in one place.";
+    "An Admin can Get Users,Add User, Update User,Delete User";
   const regulation = false;
 
-  const title = "PDF";
-  const url = `http://localhost:8080/api/pdfs/download`;
+
+  const title = "User";
 
   useEffect(() => {
-    const fetchPDFS = async () => {
-      const res = await getPDFS(subjectId);
+    const fetchUsers = async () => {
+      const res = await getUsers();
       setData(res.data.data);
     };
-    fetchPDFS();
-  }, [subjectId]);
+    fetchUsers();
+  }, []);
 
-  const addData = async (pdf) => {
-    const res = await addPDF(subjectId, pdf);
+  const addData = async (user) => {
+    const res = await addUser(user);
     setData((prev) => [...prev, res.data.data]);
   };
 
-
-  const deleteData = async (pdfId) => {
-    const res = await deletePDF(pdfId);
+  const deleteData = async (id) => {
+    const res = await deleteUser(id);
     setData((prev) =>
       prev.filter((item) => item.id !== res.data.data.id)
     );
   };
 
-  
-  const updateData = async (pdfId, pdf) => {
-    const res = await updatePDF(pdfId, pdf);
+  const updateData = async (id,user) => {
+    const res = await updateUser(id,user);
     setData((prev) =>
       prev.map((item) =>
         item.id === res.data.data.id ? res.data.data : item
@@ -58,7 +52,7 @@ export default function PDFs() {
   const description = (name) => {
     return (
       <div className="text-sm text-gray-600 mt-2">
-        {`Comprehensive study materials and syllabus for the ${name} batch. Updated for the latest academic year.`}
+        {`Administrative panel to manage users of the ${name} batch. Allows creation, modification, and deletion of user accounts.`}
       </div>
     );
   };
@@ -71,15 +65,15 @@ export default function PDFs() {
         updateData,
         description,
         title,
-        url,
+        regulation,
         data,
         imgHeading,
-        imgSpam, 
-        regulation,
+        imgSpam,
+      
       }}
     >
       <Body />
-      <Cards />
+      <Users />
     </ItemsContext.Provider>
   );
 }
