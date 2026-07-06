@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url=process.env.Backend_URL || 'http://localhost:8080';
+const url=process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 
 const api =axios.create({
     baseURL:url,
